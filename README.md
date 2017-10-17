@@ -21,15 +21,26 @@ If using gitlab to upload backups that need `IAM` account to access bucket that 
 
 NOTE:Only select main files inside the project. Don't zip whole project.
 
-![Zip selected files](images/lambda-pick-files-to-zip.png)
+> ![Zip selected files](images/lambda-pick-files-to-zip.png)
 
-![Select code type](images/lambda-select-code-type.png)
+> ![Select code type](images/lambda-select-code-type.png)
 
-![Select upload zip file](images/lambda-select-zip-file.png)
+> ![Select upload zip file](images/lambda-select-zip-file.png)
 
 You can use buildin test json to test out your lambda function.
 
-![Test using buildin test event](images/lambda-test-json.png)
+> ![Test using buildin test event](images/lambda-test-json.png)
+
+Using environment variables to store variables or secrets.
+```js
+var options = {
+        uri: process.env.SLACK_WEBHOOK_URI,
+        method: 'POST',
+        json: attachments
+};
+```
+> ![Using environment varialbes](images/lambda-env-variables.png)
+
 
 [S3 delete by maker created event example](s3DeleteByMakerCreatedEvent.json)
 
