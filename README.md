@@ -13,9 +13,9 @@ If using gitlab to upload backups that need `IAM` account to access bucket that 
 
 #### Step 3: Create lambda function. ####
 
-**If require exteral ndoe modules that will need upload .zip to lambda function first.**
+**If require exteral node modules that will need upload .zip to lambda function first.**
 
-NOTE:Only select main files inside the project. Don't zip hold project.
+NOTE:Only select main files inside the project. Don't zip whole project.
 
 ![Zip selected files](images/lambda-pick-files-to-zip.png)
 
