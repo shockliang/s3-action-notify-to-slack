@@ -8,7 +8,11 @@ This is main steps:
 If using gitlab to upload backups that need `IAM` account to access bucket that will generate id and key to access S3. 
 
 #### Step 2: Create a slack `Incoming WebHook` integration ####
+
+[Slack message formatting reference](https://api.slack.com/docs/messages)
+
 ![Incoming WebHooks](images/Slack-Incoming-WebHooks.png)
+
 ![Setting](images/Slack-Incoming-WebHooks-settings.png)
 
 #### Step 3: Create lambda function. ####
