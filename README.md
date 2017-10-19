@@ -5,7 +5,7 @@ In my case that using gitlab backup to S3 automatic and notify to slack after up
 According this [doc](http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations). 
 > You will not receive event notifications from automatic deletes from lifecycle policies or from failed operations.
 
-We can't receive the delete event from lifecycle operations. 
+We can't receive the delete event from lifecycle operations. 
 
 This is main steps:
 
