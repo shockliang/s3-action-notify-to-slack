@@ -1,6 +1,11 @@
 # Using aws lambda to notify slack trigge by S3 bucket action ##
 
-In my case that using gitlab backup to S3 automatic and notify to slack after upload successfully or delete expired backups.
+In my case that using gitlab backup to S3 automatic and notify to slack after upload successfully or delete backups.
+
+According this [doc](http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations). 
+> You will not receive event notifications from automatic deletes from lifecycle policies or from failed operations.
+
+We can't receive the delete event from lifecycle operations. 
 
 This is main steps:
 
