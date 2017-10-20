@@ -12,7 +12,7 @@ exports.handler = (event, context, callback) => {
     
     var eventTime = event.Records[0].eventTime;
     var bucket = event.Records[0].s3.bucket.name;
-    var attachmentTitle = "New backup uploaded!";
+    var attachmentTitle = "New backup uploaded! :tada:";
     var messageTitle = "Backup to bucket - " + bucket;
     var messageLevel = "good";
     var filedValueContext = objectKey + " has been uploaded to bucket successfully on " + eventTime + "\n file size: " + objectSize + " " + objectUnit
