@@ -19,7 +19,7 @@ exports.handler = (event, context, callback) => {
         .format("YYYY/MM/DD HH:mm:ss SSS");
     var bucket = event.Records[0].s3.bucket.name;
     var attachmentTitle = `New ${objectType.toLowerCase()} uploaded! :tada:`;
-    var messageTitle = `${objectType} to bucket - bucket`;
+    var messageTitle = `${objectType} to bucket - ${bucket}`;
     var messageLevel = "good";
     var filedValueContext = objectKey + " has been uploaded to bucket successfully on " + eventTime + "\n file size: " + objectSize + " " + objectUnit
     
