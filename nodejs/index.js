@@ -1,6 +1,7 @@
 var request = require('request');
 
 exports.handler = (event, context, callback) => {
+    var objectType = process.env.OBJECT_TYPE == '' ? "Backup" : process.env.OBJECT_TYPE;
     var objectKey = event.Records[0].s3.object.key;
     var objectSize = Number((event.Records[0].s3.object.size / 1024).toFixed(2));
     var objectUnit = "KB";
@@ -12,8 +13,8 @@ exports.handler = (event, context, callback) => {
     
     var eventTime = event.Records[0].eventTime;
     var bucket = event.Records[0].s3.bucket.name;
-    var attachmentTitle = "New backup uploaded! :tada:";
-    var messageTitle = "Backup to bucket - " + bucket;
+    var attachmentTitle = `New ${objectType.toLowerCase()} uploaded! :tada:`;
+    var messageTitle = `${objectType} to bucket - bucket`;
     var messageLevel = "good";
     var filedValueContext = objectKey + " has been uploaded to bucket successfully on " + eventTime + "\n file size: " + objectSize + " " + objectUnit
     
@@ -23,14 +24,14 @@ exports.handler = (event, context, callback) => {
     
     if(action === 'ObjectRemoved') {
         if(reason === 'Delete') {
-            attachmentTitle = "Old backup has been deleted!";
+            attachmentTitle = `Old ${objectType.toLowerCase()} has been deleted!`;
         } else if (reason === 'DeleteMarkerCreated') {
-            attachmentTitle = "Backup has been deleted by manually!";
+            attachmentTitle = `${objectType} has been deleted by manually!`;
         } else {
             attachmentTitle = "Reason: " + reason; 
         }
         
-        messageTitle = "Delete backup form bucket - " + bucket;
+        messageTitle = `Delete ${objectType.toLowerCase()} form bucket ${bucket}`;
         messageLevel = "warning";
         filedValueContext = objectKey + " has been deleted from bucket on " + eventTime + " cause " + reason;
     }

@@ -5,8 +5,9 @@ How to solve this problem?
 * Manaual binding created lambda function to exist s3 bucket.
 * Binding SNS service to exist s3 bucket and pick up message from sns topic to invoked lambda function.
 
-* [AWS serverless issue #124 ref](https://github.com/awslabs/serverless-application-model/issues/124)
-* [AWS Serverless Application Model(SAM) docs](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#s3)
+[AWS serverless issue #124 ref](https://github.com/awslabs/serverless-application-model/issues/124)
+
+[AWS Serverless Application Model(SAM) docs](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#s3)
 
 ## Prerequisites ##
 * AWS S3 bucket.
@@ -15,7 +16,10 @@ How to solve this problem?
 * Aws cli.
 
 ## Setup ##
-1. Run the following from a terminal, substituting `YOUR_S3_BUCKET` for the S3 bucket described above, and `YOUR-INCOMING-WEBHOOK-URL` for the Slack URL described above:
+1. Run the following from a terminal, substituting:
+    * `YOUR_S3_BUCKET` for the S3 bucket described above.
+    * `YOUR-INCOMING-WEBHOOK-URL` for the Slack URL described above.
+    * `YOUR_OBJECT_TYPE` for substituting slack message content. e.g., Backup or Artifact 
 
 ```bash
 # restore package
@@ -28,5 +32,10 @@ $ npm run dist
 $ aws cloudformation package --template-file sam.yml --s3-bucket YOUR_S3_BUCKET --output-template-file target/packaged-template.yaml
 
 # Deploy lambda function stack to aws with slack webhook url.
-$ aws cloudformation deploy --template-file ./target/packaged-template.yaml --stack-name cp-slack-notifier --parameter-overrides SlackUrl=YOUR-INCOMING-WEBHOOK-URL --capabilities CAPABILITY_IAM
+$ aws cloudformation deploy --template-file ./target/packaged-template.yaml --stack-name s3-action-slack-notifier --parameter-overrides SlackUrl=YOUR-INCOMING-WEBHOOK-URL ObjectType=YOUR_OBJECT_TYPE --capabilities CAPABILITY_IAM
+```
+
+## Teardown ##
+```bash
+$ aws cloudformation delete-stack --stack-name s3-action-slack-notifier
 ```
