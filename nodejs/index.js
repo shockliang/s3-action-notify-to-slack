@@ -1,6 +1,9 @@
-var request = require('request');
+const monent = require('moment-timezone');
+const request = require('request');
 
 exports.handler = (event, context, callback) => {
+    // If timezone empty that will using default ISO time to display.
+    var timezone = process.env.TIMEZONE;
     var objectType = process.env.OBJECT_TYPE == '' ? "Backup" : process.env.OBJECT_TYPE;
     var objectKey = event.Records[0].s3.object.key;
     var objectSize = Number((event.Records[0].s3.object.size / 1024).toFixed(2));
@@ -11,7 +14,9 @@ exports.handler = (event, context, callback) => {
         objectUnit = "MB";
     }
     
-    var eventTime = event.Records[0].eventTime;
+    var eventTime = monent
+        .tz(event.Records[0].eventTime, timezone)
+        .format("YYYY/MM/DD HH:mm:ss SSS");
     var bucket = event.Records[0].s3.bucket.name;
     var attachmentTitle = `New ${objectType.toLowerCase()} uploaded! :tada:`;
     var messageTitle = `${objectType} to bucket - bucket`;

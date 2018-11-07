@@ -9,6 +9,9 @@ Parameters:
   ObjectType:
     AllowedPattern : ".+"
     Type: String
+  Timezone:
+    AllowedPattern : ".+"
+    Type: String
 
 Resources:
   S3ActionNotifierLambda:
@@ -23,3 +26,4 @@ Resources:
         Variables:
           SLACK_WEBHOOK_URI: !Ref SlackUrl
           OBJECT_TYPE: !Ref ObjectType
+          TIMEZONE: !Ref Timezone
